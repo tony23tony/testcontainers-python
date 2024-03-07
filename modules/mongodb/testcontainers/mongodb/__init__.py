@@ -83,7 +83,9 @@ class MongoDbContainer(DbContainer):
 
     @wait_container_is_ready()
     def _connect(self) -> MongoClient:
-        return MongoClient(self.get_connection_url())
+        m = MongoClient()
+        m.__init__(self.get_connection_url())
+        return m
 
     def get_connection_client(self) -> MongoClient:
         return self._connect()
